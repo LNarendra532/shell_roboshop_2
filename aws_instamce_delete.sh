@@ -35,7 +35,7 @@ for instance_id in ${instances[@]}
 do
     echo "Terminating instance: $instance_id"
     
-    if [$instace_id != "shell"]
+    if [ $instace_id != "shell" ]
     then
         # Terminate the instance
         aws ec2 terminate-instances --instance-ids "$instance_id" --output table
