@@ -33,21 +33,22 @@ instances=$(aws ec2 describe-instances --filters "Name=instance-state-name,Value
 
 for instance_id in ${instances[@]} 
 do
-    echo "Terminating instance: $instance_id"
-    
-    if [ $instace_id != "i-06caa275e56d19b76" ]
-    then
-        # Terminate the instance
-        aws ec2 terminate-instances --instance-ids "$instance_id" --output table
-
-        # Check if termination was successful
-        if [ $? -eq 0 ] 
-        then
-            echo "Successfully initiated termination of instance: $instance_id"
-        else
-            echo "Failed to terminate instance: $instance_id"
-        fi
+    # Skip if name is "shell"
+    if [ "$name" = "shell" ]; then
+        echo "Skipping instance named 'shell': $instance_id"
+        continue
     fi
-   
+
+    echo "Terminating instance: $instance_id ($name)"
+
+    # Terminate the instance
+    aws ec2 terminate-instances --instance-ids "$instance_id" --output table
+
+    # Check if termination was successful
+    if [ $? -eq 0 ]; then
+        echo "Successfully initiated termination of instance: $instance_id"
+    else
+        echo "Failed to terminate instance: $instance_id"
+    fi
 done
  
