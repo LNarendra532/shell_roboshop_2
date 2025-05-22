@@ -6,7 +6,8 @@ ZONE_ID="Z0388521KFVW7JPV7X7D"
 DOMAIN_NAME="narendaws-84s.site"
 INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalouge" "user" "cart" "shipping" "payment" "dispatch" "frontend")
 
-for instance in ${INSTANCES[@]}
+# for instance in ${INSTANCES[@]}
+for instance in $@ # runtime we need give values like - mongodb redis mysql
 do
     INSTANCE_ID=$(aws ec2 run-instances --image-id ami-09c813fb71547fc4f --instance-type t3.micro --security-group-ids sg-0c8b40fccb45fd37f --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$instance}]" --query "Instances[0].InstanceId" --output text)
     #INSTANCE_ID=$(aws ec2 run-instances --image-id ami-09c813fb71547fc4f --instance-type t3.micro --security-group-ids sg-01bc7ebe005fb1cb2 --tag-specifications "ResourceType=instance,Tags=[{Key=Name, Value=$instance}]" --query "Instances[0].InstanceId" --output text)
