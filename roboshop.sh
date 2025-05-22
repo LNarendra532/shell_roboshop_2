@@ -1,9 +1,9 @@
 #!/bin/bash
 
-AMI_ID="ami-09c813fb71547fc4f"
+AMI_ID="ami-09c813fb71547fc4f"  
 SG_ID="sg-0c8b40fccb45fd37f"
-ZONE_ID="Z0388521KFVW7JPV7X7D"
-DOMAIN_NAME="narendaws-84s.site"
+ZONE_ID="Z0388521KFVW7JPV7X7D" #route 54 zone id
+DOMAIN_NAME="narendaws-84s.site" 
 INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalouge" "user" "cart" "shipping" "payment" "dispatch" "frontend")
 
 # for instance in ${INSTANCES[@]}
@@ -28,7 +28,7 @@ do
         ,"Changes": [{
         "Action"              : "UPSERT"
         ,"ResourceRecordSet"  : {
-            "Name"              : "'$RECORD_IP'"
+            "Name"              : "'$RECORD_IP'" 
             ,"Type"             : "A"
             ,"TTL"              : 1
             ,"ResourceRecords"  : [{
