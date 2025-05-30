@@ -34,7 +34,7 @@ instances=$(aws ec2 describe-instances --filters "Name=instance-state-name,Value
 for instance_id in ${instances[@]} 
 do
     # Skip if name is "shell"
-    if [ "$name" = "shell" ]; then
+    if [ "$instance_id" = "shell" ]; then
         echo "Skipping instance named 'shell': $instance_id"
         continue
     fi
